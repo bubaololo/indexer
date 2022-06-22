@@ -22,11 +22,17 @@ Auth::routes(['verify' => true]);
 
 Route::get('/mail', [App\Http\Controllers\MailController::class, 'sendMail']);
 
-Route::group(['middleware' => ['auth', 'verified']], function () {
+// Route::group(['middleware' => ['auth', 'verified']], function () {
   
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/services', function (){
+        return view('services.services-index');
+    })->name('services-index');
+    Route::get('/services/indexer', function (){
+        return view('services.indexer');
+    })->name('indexer');
 
-});
+// });
 
 

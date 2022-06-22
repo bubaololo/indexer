@@ -28,7 +28,7 @@
                                             <div class="col-md-12">
                                                 <div class="mb-4">
                                                     <label class="form-label" for="email">Email adress</label>
-                                                    <input id="email" type="email"
+                                                    <input id="email" type="email" name="email"
                                                         class="form-control @error('email') is-invalid @enderror"
                                                         value="{{ old('email') }}" required autocomplete="email" autofocus
                                                         placeholder="Enter e-mail">

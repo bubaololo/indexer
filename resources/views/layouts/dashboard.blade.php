@@ -19,6 +19,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    @stack('styles')
+
 </head>
 
 
@@ -38,19 +40,19 @@
                         <div class="navbar-brand-box text-center">
                             <a href="/" class="logo logo-dark">
                                 <span class="logo-sm">
-                                    <img src="assets/images/logo-sm.png" alt="logo-sm-dark" height="22">
+                                    <img src=" {{ asset('assets/images/logo-sm.png') }}" alt="logo-sm-dark" height="22">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="assets/images/logo-dark.png" alt="logo-dark" height="24">
+                                    <img src=" {{ asset('assets/images/logo-dark.png') }}" alt="logo-dark" height="24">
                                 </span>
                             </a>
-
+                          
                             <a href="index.html" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <img src="assets/images/logo-sm.png" alt="logo-sm-light" height="22">
+                                    <img src=" {{ asset('assets/images/logo-sm.png') }}" alt="logo-sm-light" height="22">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="assets/images/logo-light.png" alt="logo-light" height="24">
+                                    <img src=" {{ asset('assets/images/logo-light.png') }}" alt="logo-light" height="24">
                                 </span>
                             </a>
                         </div>
@@ -284,7 +286,7 @@
                                     <span>Сервисы</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    {{-- <li><a href="{{ route('indexer')  }}">Индексатор</a></li> --}}
+                                    <li><a href="{{ route('indexer') }}">Индексатор</a></li>
                                     <li><a href="layouts-hori-topbar-dark.html">Сервис2</a></li>
                                     <li><a href="layouts-hori-boxed-width.html">Сервис3</a></li>
                                 </ul>
@@ -418,11 +420,12 @@
         <div class="rightbar-overlay"></div>
         @show
         <!-- JAVASCRIPT -->
-        <script src="assets/libs/jquery/jquery.min.js"></script>
-        <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+        
+        <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/metismenu/metisMenu.min.js') }}"></script>
         {{-- <script src="assets/libs/simplebar/simplebar.min.js"></script> --}}
-        <script src="assets/libs/node-waves/waves.min.js"></script>
+        <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
 
         <!-- apexcharts js -->
         {{-- <script src="assets/libs/apexcharts/apexcharts.min.js"></script> --}}
@@ -433,7 +436,8 @@
 
         <script src="assets/js/pages/dashboard.init.js"></script>
 
-        <script src="assets/js/app.js"></script>
+        
+        <script src="{{ asset('assets/js/app.js') }}"></script>
 
     </body>
 
