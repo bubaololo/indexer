@@ -22,7 +22,9 @@ Auth::routes(['verify' => true]);
 
 Route::get('/mail', [App\Http\Controllers\MailController::class, 'sendMail']);
 
-// Route::group(['middleware' => ['auth', 'verified']], function () {
+Route::post('/indexer', [App\Http\Controllers\IndexController::class, 'sendApiRequest']);
+
+Route::group(['middleware' => ['auth', 'verified']], function () {
   
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -33,6 +35,6 @@ Route::get('/mail', [App\Http\Controllers\MailController::class, 'sendMail']);
         return view('services.indexer');
     })->name('indexer');
 
-// });
+});
 
 

@@ -18,4 +18,15 @@
         </div>
     </div>
     <!-- end page title -->
+    <div class="col-md-6 col-xl-3">
+    <div class="card">
+        <img class="card-img-top img-fluid"
+            src="https://developers.google.com/search/images/googlebot_and_spider_header.png?hl=ru" alt="Card image cap">
+        <div class="card-body">
+            <h4 class="card-title ">Индексация</h4>
+            <p class="card-text">Быстрая индексация страниц через google indexing API</p>
+            <a href="{{ route('indexer') }}" class="btn btn-primary waves-effect waves-light">перейти</a>
+        </div>
+    </div>
+</div>
 @endsection

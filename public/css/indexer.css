@@ -20,10 +20,10 @@
     /* display: grid; */
     width: 100%;
     height: 100%;
-    padding: 5vh 10vh;
+    padding: 16px;
     grid-template-columns: 1fr 2fr;
     grid-template-areas: "form display display";
-    gap: 2vw;
+    gap: 16px;
   }
   
   details {
@@ -83,39 +83,12 @@
   .email {
     color: var(--bright-color);
   }
-  textarea {
-    background-color: var(--bright-color);
-    min-height: 70vh;
-    width: 100%;
-    /* border-radius: 20px; */
-    padding: 2ch;
-    color: var(--text-color);
-    line-height: 3ch;
-    border: none;
-    /* background-color: rgba(255, 255, 255, .1); */
-    outline-offset: 2ch;
-    /* outline: 1px solid var(--accent-color); */
+  #one {
+    min-height: 25vh;
     scrollbar-width: thin;
     scrollbar-color: var(--accent-color) var(--bg-color);
-    resize: vertical;
-  }
-  select {
-    padding: 1ch;
   }
   
-  .button {
-    padding: 1ch;
-    margin: 5vw;
-    border-radius: 20px;
-    background-color: var(--accent-color);
-    border: none;
-    margin-top: 4ch;
-    text-align: center;
-    display: inline-block;
-    color: var(--bg-color);
-    text-decoration: none;
-    cursor: pointer;
-  }
   .list._active {
     background-image: url(/NyanCat.gif);
     background-repeat: no-repeat;

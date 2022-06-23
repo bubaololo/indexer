@@ -27,7 +27,7 @@
 
 
                     <h4 class="card-title">Google indexing API</h4>
-                    <p class="card-title-desc">Сообщает google о новых\обновлённых страницах <code class="highlighter-rouge">.nav-tabs</code> class to generate a tabbed interface.</p>
+                    <p class="card-title-desc">Сообщает google о новых\обновлённых страницах</p>
 
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
@@ -58,15 +58,16 @@
                         <div class="tab-pane active" id="home" role="tabpanel">
                             <p class="mb-0">
                                 <div class="indexer__wrapper">
-                                    <a href="results.html" class="button">Посмотреть логи по предыдущему запросу</a>
+                                    <a href="results.html" class="btn btn-secondary waves-effect waves-light">Посмотреть логи по предыдущему запросу</a>
 
                                 
                                     <div class="box">
-                                        <form method="POST" id="form">
-                                            <!-- <form action="php/app.php" method="POST"> -->
-                                            <textarea name="one" id="one" placeholder="example.com"></textarea>
+                                        <form id="form" >
+                                             {{-- <form action="/indexer" method="POST" enctype="multipart/form-data">  --}}
+                                                @csrf
+                                            <textarea name="one" id="one" class="form-control my-3" placeholder="example.com" data-bs-toggle="popover" data-bs-trigger="focus" title="" data-bs-content="В форму вставляем список URL, каждый URL обязательно на новой строке" data-bs-original-title="Список URL"></textarea>
                                             <div class="form__controls" id="key">
-                                              <select class="key__handler" id="key" name="key">
+                                              <select class="form-select d-inline-block w-auto" id="key" name="key" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Выберите ключ на котором есть неизрасходованные на сегодня запросы">
                                                 <option value="1">ключ №<b>1</b></option>
                                                 <option value="2">ключ №<b>2</b></option>
                                                 <option value="3">ключ №<b>3</b></option>
@@ -82,13 +83,13 @@
                                                 <option value="13">ключ №<b>13</b></option>
                                                 <option value="14">ключ №<b>14</b></option>
                                               </select>
-                                              <select class="action__handler" name="action">
+                                              <select class="form-select d-inline-block w-auto" name="action" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Выберите действие">
                                                 <option value="URL_UPDATED">Добавить в индекс</option>
                                                 <option value="get">Узнать статус</option>
                                                 <option value="URL_DELETED">Удалить из индекса</option>
                                               </select>
                                               
-                                              <input type="submit" name="send" value="отправить" class="button">
+                                              <input type="submit" name="send" value="отправить" class="btn btn-primary waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Отправить запросы с указанными URL">
                                 
                                               </div>
                                 
@@ -144,7 +145,7 @@
                     </div>
 
                 
-            
+            <script src="{{ asset('js/indexer.js') }}" ></script>
         
 
 @endsection
