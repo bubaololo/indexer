@@ -17,7 +17,7 @@ const keysWrapper = document.querySelector('.keys')
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    // printKeys()
+    printKeys()
     const ajaxSend = async(formData) => {
         // clearList();
         display.classList.add('_active');
@@ -94,26 +94,26 @@ async function printList(responce) {
         // audioObj.play();
     }
 }
-// async function printKeys() {
-//     let getData = await fetch('php/keywatcher.php')
-//     let readyJson = await getData.json()
-//     // console.log(readyJson);
+async function printKeys() {
+    let getData = await fetch('/keys')
+    let readyJson = await getData.json()
+    // console.log(readyJson);
 
-//     if (readyJson == "") {
+    if (readyJson == "") {
 
-//         alert('ошибка запроса ключей')
-//     } else {
+        alert('ошибка запроса ключей')
+    } else {
 
-//         for (key in readyJson) {
-//             console.log(readyJson[key]);
-//             const keyBox  = document.createElement("div");
-//             keyBox.classList.add('key__wrapper');
-//             keyBox.innerText = 'ключ: '+key+' запросов: '+readyJson[key];
-//             keysWrapper.appendChild(keyBox);
-//           }
+        for (key in readyJson) {
+            console.log(readyJson[key]);
+            const keyBox  = document.createElement("div");
+            keyBox.classList.add('key__wrapper');
+            keyBox.innerText = 'ключ: '+key+' запросов: '+readyJson[key];
+            keysWrapper.appendChild(keyBox);
+          }
 
-//     }
-// }
+    }
+}
 
 
 

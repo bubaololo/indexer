@@ -22,7 +22,9 @@ Auth::routes(['verify' => true]);
 
 Route::get('/mail', [App\Http\Controllers\MailController::class, 'sendMail']);
 
-Route::post('/indexer', [App\Http\Controllers\IndexController::class, 'sendApiRequest']);
+Route::post('/indexer', [App\Http\Controllers\IndexerController::class, 'sendApiRequest']);
+
+Route::get('/keys', [App\Services\ApiKeysHandler::class, 'getKeyNames']);
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
   

@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Services\Google;
+use App\Services\GoogleApiService;
+use App\Services\ApiKeysHandler;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Request;
 
-class IndexController extends Controller
+class IndexerController extends Controller
 {
-    public function sendApiRequest( Request $request, Google $google) {
+    public function sendApiRequest( Request $request, GoogleApiService $google) {
 
         
         $textareaData = $request->one;
