@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     clearList();
                     display.classList.remove('_active');
                     printList(response);
-                    // printKeys()
+                    printKeys()
 
                 })
                 .catch((err) => console.error(err))
@@ -76,26 +76,25 @@ async function printList(responce) {
         alert('файл с ответами апи почему то пуст')
     } else {
 
-        const row  = document.createElement("pre");
-        row.innerText = readyJson;
-        display.appendChild(row);
 
 
-        // readyJson.forEach(object =>{
-        //     Object.entries(object).forEach(element => {
-        //         console.log(element[0]);
-        //         const row  = document.createElement("pre");
-        //         row.innerText = JSON.stringify(element);
-        //         display.appendChild(row);
-        //     });
-        // })
+
+       JSON.parse(readyJson).forEach(object =>{
+            Object.entries(object).forEach(element => {
+                console.log(element[0]);
+                const row  = document.createElement("pre");
+                row.innerText = JSON.stringify(element);
+                display.appendChild(row);
+            });
+        })
 
 
         // audioObj.play();
     }
 }
 async function printKeys() {
-    let getData = await fetch('/keys')
+    
+    let getData = await fetch('/keylimits')
     let readyJson = await getData.json()
     // console.log(readyJson);
 

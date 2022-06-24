@@ -67,7 +67,7 @@
                                                 @csrf
                                             <textarea name="one" id="one" class="form-control my-3" placeholder="example.com" data-bs-toggle="popover" data-bs-trigger="focus" title="" data-bs-content="В форму вставляем список URL, каждый URL обязательно на новой строке" data-bs-original-title="Список URL"></textarea>
                                             <div class="form__controls" id="key">
-                                              <select class="form-select d-inline-block w-auto" id="key" name="key" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Выберите ключ на котором есть неизрасходованные на сегодня запросы">
+                                              {{-- <select class="form-select d-inline-block w-auto" id="key" name="key" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Выберите ключ на котором есть неизрасходованные на сегодня запросы">
                                                 <option value="1">ключ №<b>1</b></option>
                                                 <option value="2">ключ №<b>2</b></option>
                                                 <option value="3">ключ №<b>3</b></option>
@@ -82,6 +82,11 @@
                                                 <option value="12">ключ №<b>12</b></option>
                                                 <option value="13">ключ №<b>13</b></option>
                                                 <option value="14">ключ №<b>14</b></option>
+                                              </select> --}}
+                                              <select class="form-select d-inline-block w-auto" id="key" name="key" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Выберите ключ на котором есть неизрасходованные на сегодня запросы">
+                                                @foreach ($keys as $keyname)
+                                                <option value="{{ $keyname }}">ключ <b>{{ $keyname }}</b></option>
+                                                @endforeach
                                               </select>
                                               <select class="form-select d-inline-block w-auto" name="action" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Выберите действие">
                                                 <option value="URL_UPDATED">Добавить в индекс</option>

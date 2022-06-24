@@ -24,7 +24,8 @@ Route::get('/mail', [App\Http\Controllers\MailController::class, 'sendMail']);
 
 Route::post('/indexer', [App\Http\Controllers\IndexerController::class, 'sendApiRequest']);
 
-Route::get('/keys', [App\Services\ApiKeysHandler::class, 'getKeyNames']);
+
+Route::get('/keylimits', [App\Services\ApiKeysService::class, 'getKeyLimits']);
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
   
@@ -33,9 +34,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/services', function (){
         return view('services.services-index');
     })->name('services-index');
-    Route::get('/services/indexer', function (){
-        return view('services.indexer');
-    })->name('indexer');
+    Route::get('/services/indexer', [App\Http\Controllers\IndexerController::class, 'index'])->name('indexer');
 
 });
 

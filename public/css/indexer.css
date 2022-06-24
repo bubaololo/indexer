@@ -90,7 +90,7 @@
   }
   
   .list._active {
-    background-image: url(/NyanCat.gif);
+    background-image: url(../assets/images/Loading_icon.gif);
     background-repeat: no-repeat;
   
     background-position: center center;
