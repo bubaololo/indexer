@@ -22,20 +22,31 @@ Auth::routes(['verify' => true]);
 
 Route::get('/mail', [App\Http\Controllers\MailController::class, 'sendMail']);
 
-Route::post('/indexer', [App\Http\Controllers\IndexerController::class, 'sendApiRequest']);
 
 
-Route::get('/keylimits', [App\Services\ApiKeysService::class, 'getKeyLimits']);
+
+
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
-  
-
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/services', function (){
+
+    Route::get('/services', function () {
         return view('services.services-index');
     })->name('services-index');
-    Route::get('/services/indexer', [App\Http\Controllers\IndexerController::class, 'index'])->name('indexer');
+
+    Route::get('/services/indexer{tab?}', [App\Http\Controllers\IndexerController::class, 'index'])->name('indexer');
+
+    Route::get('/keys/keylimits', [App\Services\ApiKeysService::class, 'getKeyLimits']);
+
+    Route::get('/keys', [App\Services\ApiKeysService::class, 'getKeyList'])->name('keys');
+
+    Route::get('/keys/{name}', [App\Services\ApiKeysService::class, 'getSpecificKey'])->name('key-page');
+    Route::get('/keys/{name}/delete', [App\Services\ApiKeysService::class, 'deleteKey'])->name('key-delete');
+    Route::post('/keys', [App\Services\ApiKeysService::class, 'addKey'])->name('key-add');
+
+    Route::post('/indexer', [App\Http\Controllers\IndexerController::class, 'sendApiRequest']);
+
+    // Route::get('/users/{id}', [App\Http\Controllers\UsersController::class, 'userInfo'])->name('user-info')->middleware('isadmin');
+
 
 });
-
-

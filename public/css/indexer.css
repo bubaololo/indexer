@@ -8,7 +8,6 @@
     background-color: var(--bg-color);
 
   
-    font-family: "Montserrat", sans-serif;
     color: var(--accent-color);
     font-size: 17px;
     position: relative;
@@ -36,14 +35,7 @@
     height: 100%;
   }
   
-  form {
-    min-height: 250px;
-    min-width: 350px;
-    text-align: center;
-    /* margin: 4ch; */
-    grid-area: form;
-    flex-basis: 30vw;
-  }
+
   .keys {
     display: flex;
     min-height: 30px;
@@ -128,5 +120,77 @@
   
   caption {
     padding: 10px;
+  }
+  .custom-textarea {
+    position: relative;
+    /* width: 800px; */
+    /* max-width: 90%; */
+    /* margin: 20px auto; */
+    /* border-radius: 5px; */
+    /* box-shadow: 0 0 16px rgba(34, 39, 37, 0.3); */
+    overflow: hidden;
+    /* padding-left: 32px; */
+  }
+  /* .custom-textarea::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 42px;
+    width: 16px;
+    height: 100%;
+    background: #FFFFFF;
+    pointer-events: none;
+    z-index: 1;
+  } */
+  .custom-textarea > .textarea {
+    display: block;
+    position: relative;
+    z-index: 1;
+    /* width: calc(100% - 58px); */
+    /* height: 150px; */
+    /* min-height: 150px; */
+    /* max-height: 90vh; */
+    /* margin-left: 58px; */
+    font-size: 16px;
+    line-height: 24px;
+    outline: none;
+    border: none;
+    /* border-radius: 0 5px 5px 0; */
+    resize: vertical;
+    white-space: pre;
+    overflow: auto;
+    word-wrap: normal;
+    padding-left: 36px;
+    /* color: #121113; */
+    /* background: #FFFFFF; */
+  }
+  .custom-textarea > .textarea::-webkit-scrollbar-track {
+    border-radius: 0;
+    background-color: #899878;
+  }
+  .custom-textarea > .textarea::-webkit-scrollbar {
+    width: 12px;
+    background-color: #FFFFFF;
+  }
+  .custom-textarea > .textarea::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background-color: #E4E6C3;
+  }
+  .custom-textarea > .linenumbers {
+    position: absolute;
+    top: -17px;
+    left: 8px;
+    width: 0px;
+   z-index: 20;
+  }
+  .custom-textarea > .linenumbers > .number {
+    font-size: 12px;
+    line-height: 24px;
+    color: var(--accent-color);
+    width: 24px;
+  }
+  .number:first-child {
+    visibility: hidden;
   }
   

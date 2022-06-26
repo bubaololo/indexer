@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return await fetchResp.text();
     };
 
-    const forms = document.querySelectorAll('form');
+    const forms = document.querySelectorAll('.indexer__form');
     forms.forEach(form => {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -94,7 +94,7 @@ async function printList(responce) {
 }
 async function printKeys() {
     
-    let getData = await fetch('/keylimits')
+    let getData = await fetch('/keys/keylimits')
     let readyJson = await getData.json()
     // console.log(readyJson);
 
@@ -114,8 +114,46 @@ async function printKeys() {
     }
 }
 
+class CustomTextarea {
+    constructor(element) {
+        this.element = element;
+        this.textarea = this.element.querySelector('.textarea');
+        this.numbers = this.element.querySelector('.linenumbers');
+        
+        this.numberOfNumbers = 0;
 
+        this.addMoreNumbers();
+        this.initEventListeners();
+    }
 
+    addMoreNumbers() {
+        let html = '';
+
+        for (let i = this.numberOfNumbers; i < this.numberOfNumbers + 100; i++) {
+            html += `<div class='number'>${ i }</div>`;
+        }
+
+        this.numberOfNumbers += 100;
+        this.numbers.innerHTML += html;
+    }
+
+    initEventListeners() {
+        this.textarea.addEventListener('scroll', () => {
+            this.numbers.style.transform = `translateY(-${ this.textarea.scrollTop }px)`;
+            
+            if (Math.abs(
+                this.numbers.offsetHeight
+                    - this.textarea.offsetHeight
+                    - this.textarea.scrollTop) < 100) {
+                this.addMoreNumbers();
+            }
+        });
+    }
+};
+
+const textarea = new CustomTextarea(document.querySelector('.custom-textarea'));
+
+let myDropzone = new Dropzone("#my-dropzone", { url: "/keys"});
 
 // printData();
 
