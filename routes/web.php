@@ -34,7 +34,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         return view('services.services-index');
     })->name('services-index');
 
-    Route::get('/services/indexer{tab?}', [App\Http\Controllers\IndexerController::class, 'index'])->name('indexer');
+    Route::get('/services/indexer', [App\Http\Controllers\IndexerController::class, 'index'])->name('indexer');
 
     Route::get('/keys/keylimits', [App\Services\ApiKeysService::class, 'getKeyLimits']);
 

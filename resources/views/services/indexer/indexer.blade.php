@@ -1,9 +1,6 @@
 @extends('layouts.dashboard')
 @push('styles')
-
-<link href="{{ asset('css/indexer.css') }}" rel="stylesheet">
-
-
+    <link href="{{ asset('css/indexer.css') }}" rel="stylesheet">
 @endpush
 
 @section('page-content')
@@ -26,10 +23,10 @@
     <!-- end page title -->
     <div class="row">
         @if (session('success'))
-        <div class="alert alert-success" role="alert">
-            {{ session('success') }}
-        </div>
-    @endif
+            <div class="alert alert-success" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
 
 
         <h4 class="card-title">Google indexing API</h4>
@@ -39,24 +36,24 @@
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" data-bs-toggle="tab" href="#home" role="tab">
-                    <i class="dripicons-home me-1 align-middle"></i> <span class="d-none d-md-inline-block">Home</span>
+                    <i class="dripicons-browser-upload me-1 align-middle"></i> <span class="d-none d-md-inline-block">indexer</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="tab" href="#info" role="tab">
-                    <i class="dripicons-user me-1 align-middle"></i> <span class="d-none d-md-inline-block">Инфо</span>
+                    <i class="dripicons-information me-1 align-middle"></i> <span class="d-none d-md-inline-block">Инфо</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="tab" href="#keys" role="tab">
-                    <i class="dripicons-mail me-1 align-middle"></i> <span class="d-none d-md-inline-block">Ключи</span>
+                    <i class="dripicons-card me-1 align-middle"></i> <span class="d-none d-md-inline-block">Ключи</span>
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="tab" href="#settings" role="tab">
                     <i class="dripicons-gear me-1 align-middle"></i> <span class="d-none d-md-inline-block">Settings</span>
                 </a>
-            </li>
+            </li> --}}
         </ul>
 
         <!-- Tab panes -->
@@ -66,8 +63,6 @@
                 <div class="indexer__wrapper">
                     <a href="results.html" class="btn btn-secondary waves-effect waves-light">Посмотреть логи по предыдущему
                         запросу</a>
-
-
                     <div class="box">
                         <form id="form" class="indexer__form">
                             {{-- <form action="/indexer" method="POST" enctype="multipart/form-data"> --}}
@@ -80,6 +75,7 @@
                                 <div class='linenumbers'></div>
                             </div>
                             <div class="form__controls" id="key">
+
                                 <select class="form-select d-inline-block w-auto" id="key" name="key"
                                     data-bs-toggle="tooltip" data-bs-placement="top" title=""
                                     data-bs-original-title="Выберите ключ на котором есть неизрасходованные на сегодня запросы">
@@ -89,6 +85,7 @@
                                         </option>
                                     @endforeach
                                 </select>
+
                                 <select class="form-select d-inline-block w-auto" name="action" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="" data-bs-original-title="Выберите действие">
                                     <option value="URL_UPDATED">Добавить в индекс</option>
@@ -115,7 +112,6 @@
                         </div>
 
                     </div>
-                    <script src="{{ asset('js/indexer.js') }}"></script>
                 </div>
                 </p>
             </div>
@@ -133,10 +129,10 @@
                     - в блоке информации о ключах указывается количество запросов по ключу за последние сутки
                 </p>
             </div>
-            <div class="tab-pane" id="profile" role="tabpanel">
+            {{-- <div class="tab-pane" id="profile" role="tabpanel">
                 <p class="mb-0">
                     lorem ipsum</p>
-            </div>
+            </div> --}}
             <div class="tab-pane" id="keys" role="tabpanel">
                 <p class="mb-0">
                 <div class="row">
@@ -148,41 +144,43 @@
                                     <h5 class="card-title">Название ключа: {{ $keyname }}</h5>
                                     <p class="card-text">{{ $keyacc }}</p>
                                     @can('handle-keys')
-                                    <a href="{{ route('key-page', $keyname) }}" class="btn btn-primary">Подробнее</a>
+                                        <a href="{{ route('key-page', $keyname) }}" class="btn btn-outline-info">Подробнее</a>
                                     @endcan
                                 </div>
                             </div>
                         </div>
                     @endforeach
+
                     @can('handle-keys')
                         <div class="col-lg-4">
-                    <div class="card">
-                        <div class="card-body">
+                            <div class="card">
+                                <div class="card-body">
 
-                            <h4 class="card-title">Bootstrap FileStyle</h4>
-                            <p class="card-title-desc">Examples of bootstrap fileStyle.</p>
+                                    <h4 class="card-title">Новый ключ</h4>
+                                    <p class="card-title-desc">загрузить файл API ключа</p>
 
-                            <form action="/keys" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <label for="formFile" class="form-label">Default file input example</label>
-                                <input class="form-control" type="file" name="file" id="formFile" required>
+                                    <form action="/keys" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        <label for="formFile" class="form-label">Выберите .json файл, привязанный к google service account, 
+                                            имя файла должно быть уникальным.
+                                        </label>
+                                        <input class="form-control" type="file" name="file" id="formFile" required>
 
-                                  <button type="submit" class="btn m-3 btn-primary waves-effect waves-light">
-                                    Загрузить <i class="ri-arrow-right-line align-middle ms-2"></i> 
-                                </button>
-                            </form>
+                                        <button type="submit" class="btn mt-3 btn-primary waves-effect waves-light">
+                                            Загрузить <i class="ri-arrow-right-line align-middle ms-2"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
                     @endcan
-   
+
                 </div>
                 </p>
             </div>
         </div>
 
-
         @push('scripts')
-        <script src="{{ asset('js/indexer.js') }}"></script>
-@endpush
+            <script src="{{ asset('js/indexer.js') }}"></script>
+        @endpush
     @endsection
