@@ -20,9 +20,10 @@
     </div>
     <!-- end page title -->
 
-
-
-
+    <a href="{{ route('indexer') }}">
+    <button type="button" class="btn m-3 btn-outline-secondary waves-effect waves-light">
+        <i class="ri-arrow-left-line align-middle "></i>  назад
+    </button></a> 
                 <div class="card-header">
                     <i class="mdi mdi-file-key"></i>
                     Файл ключа: {{ $keyName }}.json

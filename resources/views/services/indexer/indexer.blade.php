@@ -21,12 +21,20 @@
         </div>
     </div>
     <!-- end page title -->
-    <div class="row">
         @if (session('success'))
             <div class="alert alert-success" role="alert">
                 {{ session('success') }}
             </div>
         @endif
+        @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 
         <h4 class="card-title">Google indexing API</h4>
@@ -136,21 +144,6 @@
             <div class="tab-pane" id="keys" role="tabpanel">
                 <p class="mb-0">
                 <div class="row">
-
-                    @foreach ($keys as $keyname => $keyacc)
-                        <div class="col-sm-6 col-lg-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Название ключа: {{ $keyname }}</h5>
-                                    <p class="card-text">{{ $keyacc }}</p>
-                                    @can('handle-keys')
-                                        <a href="{{ route('key-page', $keyname) }}" class="btn btn-outline-info">Подробнее</a>
-                                    @endcan
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-
                     @can('handle-keys')
                         <div class="col-lg-4">
                             <div class="card">
@@ -174,7 +167,19 @@
                             </div>
                         </div>
                     @endcan
-
+                    @foreach ($keys as $keyname => $keyacc)
+                        <div class="col-sm-6 col-lg-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Название ключа: {{ $keyname }}</h5>
+                                    <p class="card-text">{{ $keyacc }}</p>
+                                    @can('handle-keys')
+                                        <a href="{{ route('key-page', $keyname) }}" class="btn btn-outline-info">Подробнее</a>
+                                    @endcan
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
                 </p>
             </div>
