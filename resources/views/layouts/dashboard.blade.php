@@ -70,7 +70,7 @@
 
 
 
-                        <div class="dropdown d-none d-lg-inline-block ms-1">
+                        {{-- <div class="dropdown d-none d-lg-inline-block ms-1">
                             <button type="button" class="btn header-item noti-icon waves-effect"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="ri-apps-2-line"></i>
@@ -120,7 +120,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="dropdown d-none d-lg-inline-block ms-1">
                             <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
@@ -422,7 +422,7 @@
         <!-- JAVASCRIPT -->
         
         <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
-        <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        {{-- <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script> --}}
         <script src="{{ asset('assets/libs/metismenu/metisMenu.min.js') }}"></script>
         {{-- <script src="assets/libs/simplebar/simplebar.min.js"></script> --}}
         <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>

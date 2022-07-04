@@ -55,10 +55,10 @@ class GoogleApiService
                 cache([$apiKey => cache($apiKey)+1,86400]);
             }
             $data = (string) $response->getBody();
-            $result[] = json_decode($data, true);
+            $result = json_decode($data, true);
         
             info($result);
-            UrlProcessed::dispatch($data,$userId);
+            UrlProcessed::dispatch($result,$userId);
             // UrlProcessed::dispatch('yo');
         // return $result;
     }

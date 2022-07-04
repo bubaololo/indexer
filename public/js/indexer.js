@@ -76,6 +76,7 @@ async function printList(responce) {
 
                 const row  = document.createElement("pre");
                 row.innerText = JSON.stringify(responce);
+                // row.innerText = responce;
                 display.appendChild(row);
 
 
@@ -100,6 +101,8 @@ async function printKeys() {
             keyBox.innerText = 'ключ: '+key+' запросов: '+readyJson[key];
             keysWrapper.appendChild(keyBox);
           }
+
+
 
     }
 }
@@ -143,7 +146,7 @@ class CustomTextarea {
 
 const textarea = new CustomTextarea(document.querySelector('.custom-textarea'));
 
-let myDropzone = new Dropzone("#my-dropzone", { url: "/keys"});
+
 
 // printData();
 
