@@ -4,15 +4,12 @@ namespace App\Services;
 
 use Google_Client;
 use Illuminate\Support\Facades\Storage;
+use App\Events\UrlProcessed;
 
 class GoogleApiService
 {
     /**
     * This class provides acces to Google API's, using "google/apiclient" package
-    * @global Test показываем что мы используем глобальную переменную $a
-    * @staticvar string $var Эту переменную мы будем возвращать
-    * @param string $param1 Первый параметр функции
-    * @param string $param2 Второй параметр
     * @return string
     */
 
@@ -61,6 +58,8 @@ class GoogleApiService
             $result[] = json_decode($data, true);
         
             info($result);
-        return $result;
+            UrlProcessed::dispatch($data);
+            // UrlProcessed::dispatch('yo');
+        // return $result;
     }
 }

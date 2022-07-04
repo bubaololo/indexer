@@ -5,7 +5,7 @@ use App\Jobs\ProcessApiRequest;
 use App\Services\ApiKeysService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-// use Illuminate\Support\Facades\Request;
+use App\Events\UrlProcessed;
 
 class IndexerController extends Controller
 {
@@ -30,7 +30,8 @@ class IndexerController extends Controller
             ProcessApiRequest::dispatch($apiKey,$url,$action);
         }
         // return json_encode($google->indexingApi($apiKey, $textareaData, $action));
-        return json_encode("отправляем запросы");
+        // UrlProcessed::dispatch('yo');
+        return json_encode('request processed');
   
 
 

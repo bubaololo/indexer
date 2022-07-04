@@ -68,30 +68,20 @@ function clearList() {
 
 async function printList(responce) {
     
-    let readyJson = responce
-    console.log(readyJson);
 
-    if (readyJson == "") {
-        // audioObj.play();
-        alert('файл с ответами апи почему то пуст')
-    } else {
+    console.log(responce);
 
 
 
 
-       JSON.parse(readyJson).forEach(object =>{
-            Object.entries(object).forEach(element => {
-                console.log(element[0]);
                 const row  = document.createElement("pre");
-                row.innerText = JSON.stringify(element);
+                row.innerText = JSON.stringify(responce);
                 display.appendChild(row);
-            });
-        })
 
 
         // audioObj.play();
     }
-}
+
 async function printKeys() {
     
     let getData = await fetch('/keys/keylimits')
