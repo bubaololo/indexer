@@ -34,20 +34,17 @@ class GoogleApiService
         */
 
 
-    public function indexingApi($apiKey, $textareaData, $actionType)
+    public function sendRequest($apiKey, $url, $actionType)
     {
-        $arrayRE = '|\s|';
-        $urlArray = preg_split($arrayRE, $textareaData);
-        $urls = array_filter($urlArray);
+
 
         $this->client->setAuthConfig(Storage::path('keys/'.$apiKey.'.json'));
         $this->client->addScope('https://www.googleapis.com/auth/indexing');
         $httpClient = $this->client->authorize();
         $endpoint = 'https://indexing.googleapis.com/v3/urlNotifications:publish';
-        foreach ($urls as $url) {
+        
             if (!filter_var($url, FILTER_VALIDATE_URL)) {
-                $result[] =  $url.'URL не является корректным.';
-                continue;
+                return $result[] =  $url.'URL не является корректным.';
             } elseif ($actionType == 'get') {
                 $response = $httpClient->get('https://indexing.googleapis.com/v3/urlNotifications/metadata?url=' . urlencode($url));
             } else {
@@ -62,8 +59,8 @@ class GoogleApiService
             }
             $data = (string) $response->getBody();
             $result[] = json_decode($data, true);
-        }
-
+        
+            info($result);
         return $result;
     }
 }

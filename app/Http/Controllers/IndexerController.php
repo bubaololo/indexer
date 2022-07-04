@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Services\GoogleApiService;
+use App\Jobs\ProcessApiRequest;
 use App\Services\ApiKeysService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -16,13 +16,21 @@ class IndexerController extends Controller
     }
 
 
-    public function sendApiRequest( Request $request, GoogleApiService $google) {
+    public function sendApiRequest( Request $request) {
 
         
         $textareaData = $request->one;
         $apiKey = $request->key;
         $action = $request->action;
-        return json_encode($google->indexingApi($apiKey, $textareaData, $action));
+        // split teaxtarea content to a separate strings
+        $urlArray = preg_split('|\s|', $textareaData);
+        $urls = array_filter($urlArray);
+        
+        foreach($urls as $url) {
+            ProcessApiRequest::dispatch($apiKey,$url,$action);
+        }
+        // return json_encode($google->indexingApi($apiKey, $textareaData, $action));
+        return json_encode("отправляем запросы");
   
 
 
