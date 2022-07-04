@@ -66,16 +66,16 @@ function clearList() {
 
 // audioObj = new Audio('notice.mp3');
 
-async function printList(responce) {
+async function printList(data) {
     
 
-    console.log(responce);
+    console.log(data);
 
 
 
 
                 const row  = document.createElement("pre");
-                row.innerText = JSON.stringify(responce);
+                row.innerText = JSON.stringify(data.responce, undefined, 2);
                 // row.innerText = responce;
                 display.appendChild(row);
 
