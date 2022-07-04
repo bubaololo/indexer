@@ -187,5 +187,15 @@
 
         @push('scripts')
             <script src="{{ asset('js/indexer.js') }}"></script>
+            <script>
+document.addEventListener('DOMContentLoaded', function() {
+    var channel = Echo.channel('notification');
+channel.listen('.event', function(data) {
+  alert(JSON.stringify(data));
+});
+});
+
+            </script>
+
         @endpush
     @endsection
