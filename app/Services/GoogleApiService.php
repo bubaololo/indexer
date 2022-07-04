@@ -31,7 +31,7 @@ class GoogleApiService
         */
 
 
-    public function sendRequest($apiKey, $url, $actionType)
+    public function sendRequest($apiKey, $url, $actionType, $userId)
     {
 
 
@@ -58,7 +58,7 @@ class GoogleApiService
             $result[] = json_decode($data, true);
         
             info($result);
-            UrlProcessed::dispatch($data);
+            UrlProcessed::dispatch($data,$userId);
             // UrlProcessed::dispatch('yo');
         // return $result;
     }

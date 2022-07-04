@@ -12,7 +12,7 @@ class IndexerController extends Controller
 
     public function index() {
         $keyList = ApiKeysService::getKeyList();
-        return view('services/indexer/indexer', ['keys' => $keyList]);
+        return view('services/indexer/indexer', ['keys' => $keyList, 'userId' => auth()->user()->id]);
     }
 
 

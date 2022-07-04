@@ -189,7 +189,7 @@
             <script src="{{ asset('js/indexer.js') }}"></script>
             <script>
 document.addEventListener('DOMContentLoaded', function() {
-    var channel = Echo.channel('indexer');
+    var channel = Echo.channel('indexer{{ $userId }}');
 channel.listen('.App\\Events\\UrlProcessed', function(data) {
 //   alert(JSON.stringify(data));
   printList(data);

@@ -29,7 +29,7 @@ class ProcessApiRequest implements ShouldQueue
     private $url;
     private $actionType;
     private $apiKeyPath;
-    // public $userId = auth()->user()->id;
+    public $userId;
 
     public function __construct($apiKey, $url, $actionType)
     {
@@ -37,6 +37,7 @@ class ProcessApiRequest implements ShouldQueue
         $this->url = $url;
         $this->actionType = $actionType;
         $this->apiKeyPath = Storage::path('keys/'.$apiKey.'.json');
+        $this->userId = auth()->user()->id;
     }
 
     /**
@@ -46,6 +47,6 @@ class ProcessApiRequest implements ShouldQueue
      */
     public function handle(GoogleApiService $api)
     {
-        $api->sendRequest($this->apiKey, $this->url, $this->actionType);
+        $api->sendRequest($this->apiKey, $this->url, $this->actionType, $this->userId);
     }
 }

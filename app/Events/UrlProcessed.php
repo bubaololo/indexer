@@ -21,9 +21,12 @@ class UrlProcessed implements ShouldBroadcastNow
      * @return void
      */
     public $responce;
-    public function __construct($responce)
+    public $userId;
+    public function __construct($responce,$userId)
     {
         $this->responce=$responce;
+        $this->userId=$userId;
+
     }
 
     /**
@@ -33,6 +36,6 @@ class UrlProcessed implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return new Channel('indexer');
+        return new Channel('indexer'.$this->userId);
     }
 }
