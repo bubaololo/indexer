@@ -9,7 +9,6 @@ class ApiKeysService
 {
     private $keyStatus = [];
 
-
     public static function getKeyList()
     {
         $keysFiles = Storage::files('/keys/');
@@ -19,9 +18,6 @@ class ApiKeysService
             $keyName = $keyN[0];
             $keyContent = json_decode(Storage::get($key), true);
             $keyAcc = $keyContent['client_email'];
-           
-
-
             $keyList[$keyName] = $keyAcc;
         }
         return $keyList;
@@ -43,7 +39,6 @@ class ApiKeysService
     {
         foreach (Storage::files('/keys/') as $key) {
             $keyContent = json_decode(Storage::get($key), true);
-            print_r($keyContent['client_email']);
         }
     }
     public function getSpecificKey($keyName)
@@ -73,31 +68,4 @@ class ApiKeysService
         return redirect()->route('indexer')->with('success', "Ключ $origFileName был добавлен");
     }
 
-    public function post_upload()
-    {
-        $input = Input::all();
-        $rules = array(
-          'file' => 'image|max:3000',
-      );
-  
-        $validation = Validator::make($input, $rules);
-  
-        if ($validation->fails()) {
-            return Response::make($validation->errors->first(), 400);
-        }
-  
-        $file = Input::file('file');
-  
-        $extension = File::extension($file['name']);
-        $directory = path('public').'uploads/'.sha1(time());
-        $filename = sha1(time().time()).".{$extension}";
-  
-        $upload_success = Input::upload('file', $directory, $filename);
-  
-        if ($upload_success) {
-            return Response::json('success', 200);
-        } else {
-            return Response::json('error', 400);
-        }
-    }
 }

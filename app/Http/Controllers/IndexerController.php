@@ -5,7 +5,9 @@ use App\Jobs\ProcessApiRequest;
 use App\Services\ApiKeysService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use App\Events\UrlProcessed;
+use Illuminate\Bus\Batch;
+use Illuminate\Support\Facades\Bus;
+
 
 class IndexerController extends Controller
 {
@@ -26,11 +28,18 @@ class IndexerController extends Controller
         $urlArray = preg_split('|\s|', $textareaData);
         $urls = array_filter($urlArray);
         
+        $urlJobs = [];
         foreach($urls as $url) {
-            ProcessApiRequest::dispatch($apiKey,$url,$action);
+            $urlJobs[] = new ProcessApiRequest($apiKey,$url,$action);
         }
-        // return json_encode($google->indexingApi($apiKey, $textareaData, $action));
-        // UrlProcessed::dispatch('yo');
+
+        $batch = Bus::batch($urlJobs)->dispatch();
+
+        info(Bus::findBatch($batch->id));
+        // $batch->id;
+        // $batch->processedJobs();
+        // $batch->totalJobs;
+        // $batch->progress();
         return json_encode('request processed');
   
 
