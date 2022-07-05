@@ -41,10 +41,14 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/keys', [App\Services\ApiKeysService::class, 'getKeyList'])->name('keys');
 
     Route::get('/keys/{name}', [App\Services\ApiKeysService::class, 'getSpecificKey'])->name('key-page');
+
     Route::get('/keys/{name}/delete', [App\Services\ApiKeysService::class, 'deleteKey'])->name('key-delete');
+
     Route::post('/keys', [App\Services\ApiKeysService::class, 'addKey'])->name('key-add');
 
     Route::post('/indexer', [App\Http\Controllers\IndexerController::class, 'sendApiRequest']);
+
+    Route::post('/progress', [App\Http\Controllers\IndexerController::class, 'getProgressStatus']);
 
     // Route::get('/users/{id}', [App\Http\Controllers\UsersController::class, 'userInfo'])->name('user-info')->middleware('isadmin');
 

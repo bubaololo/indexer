@@ -35,15 +35,25 @@ class IndexerController extends Controller
 
         $batch = Bus::batch($urlJobs)->dispatch();
 
-        info(Bus::findBatch($batch->id));
+        // info(Bus::findBatch($batch->id));
         // $batch->id;
         // $batch->processedJobs();
         // $batch->totalJobs;
         // $batch->progress();
-        return json_encode('request processed');
+        return $batch->id;
   
 
 
+    }
+
+    public function getProgressStatus(Request $request) {
+        // info($request->getContent());
+        $batch = Bus::findBatch($request->getContent());
+        $stats = [];
+        $stats['totalJobs'] = $batch->totalJobs;
+        $stats['processedJobs'] = $batch->processedJobs();
+        $stats['progress'] = $batch->progress();
+        return json_encode($stats);
     }
 }
 // INVALID_ARGUMENT

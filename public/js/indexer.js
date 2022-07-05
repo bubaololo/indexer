@@ -14,7 +14,7 @@
 
 const display = document.querySelector('.list')
 const keysWrapper = document.querySelector('.keys')
-
+// const myStorage = window.localStorage;
 
 document.addEventListener('DOMContentLoaded', () => {
     printKeys()
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         return await fetchResp.text();
     };
-
+    
     const forms = document.querySelectorAll('.indexer__form');
     forms.forEach(form => {
         form.addEventListener('submit', function(e) {
@@ -44,16 +44,40 @@ document.addEventListener('DOMContentLoaded', () => {
                     // form.reset(); // очищаем поля формы
                     clearList();
                     display.classList.remove('_active');
-                    printList(response);
-                    printKeys()
+                    console.log(response);
+                    localStorage.setItem('batchId', response);
+                    printKeys();
 
                 })
-                .catch((err) => console.error(err))
+                .catch((err) => console.error(err));
         });
     });
 
 });
+const stats = document.querySelector('.stats');
+function getProgress(formData) {
 
+    fetch('/progress',{
+        method: 'POST',
+
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+            'X-CSRF-TOKEN': document.head.querySelector('meta[name=csrf-token]').content
+          },
+        credentials: 'same-origin',
+        body: formData
+    })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      stats.innerText = JSON.stringify(data);
+    });
+
+}
 
 function clearList() {
     // const tables = document.querySelectorAll('table');
@@ -87,7 +111,7 @@ async function printKeys() {
     
     let getData = await fetch('/keys/keylimits')
     let readyJson = await getData.json()
-    // console.log(readyJson);
+
 
     if (readyJson == "") {
 

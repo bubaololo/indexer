@@ -69,8 +69,7 @@
             <div class="tab-pane active" id="home" role="tabpanel">
                 <p class="mb-0">
                 <div class="indexer__wrapper">
-                    <a href="results.html" class="btn btn-secondary waves-effect waves-light">Посмотреть логи по предыдущему
-                        запросу</a>
+<div class="stats"></div>
                     <div class="box">
                         <form id="form" class="indexer__form">
                             {{-- <form action="/indexer" method="POST" enctype="multipart/form-data"> --}}
@@ -191,8 +190,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     var channel = Echo.channel('indexer{{ $userId }}');
 channel.listen('.App\\Events\\UrlProcessed', function(data) {
-//   alert(JSON.stringify(data));
   printList(data);
+  getProgress(localStorage.getItem('batchId'));
 });
 });
 
