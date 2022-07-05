@@ -54,7 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
-const stats = document.querySelector('.stats');
+
+const totalJobs = document.querySelector('.totalJobs');
+const processedJobs = document.querySelector('.processedJobs');
+const progress = document.querySelector('.progressbar');
+const progressBar = document.getElementById('progress');
+
+
 function getProgress(formData) {
 
     fetch('/progress',{
@@ -73,8 +79,12 @@ function getProgress(formData) {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
-      stats.innerText = JSON.stringify(data);
+    //   console.log(data);
+    //   stats.innerText = JSON.stringify(data);
+      totalJobs.innerText = data.totalJobs;
+      processedJobs.innerText = data.processedJobs;
+      progress.innerText = data.progress;
+      progressBar.style.width = `${data.progress}%`;
     });
 
 }

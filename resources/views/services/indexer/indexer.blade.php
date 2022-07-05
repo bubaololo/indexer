@@ -69,7 +69,59 @@
             <div class="tab-pane active" id="home" role="tabpanel">
                 <p class="mb-0">
                 <div class="indexer__wrapper">
-<div class="stats"></div>
+                    <div class="col-xl-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Order Stats</h5>
+                                <div>
+                                    <ul class="list-unstyled">
+                                        <li class="py-3">
+                                            <div class="d-flex">
+                                                <div class="avatar-xs align-self-center me-3">
+                                                    <div class="avatar-title rounded-circle bg-light text-primary font-size-18">
+                                                        <i class="ri-checkbox-circle-line"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <p class="text-muted mb-2">Завершено</p>
+                                                    <div class="progress progress-sm animated-progess">
+                                                        <div class="progress-bar bg-success" role="progressbar" id="progress" style="width: 0%;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <hr>
+                                
+                                <div class="text-center">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="mt-2">
+                                                <p class="text-muted mb-2">Completed</p>
+                                                <h5 class="font-size-16 mb-0 totalJobs">-</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="mt-2">
+                                                <p class="text-muted mb-2">Pending</p>
+                                                <h5 class="font-size-16 mb-0 processedJobs">-</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="mt-2">
+                                                <p class="text-muted mb-2">%</p>
+                                                <h5 class="font-size-16 mb-0 progressbar">0</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card-body -->
+                        </div>
+                        <!-- end card -->
+                    </div>
                     <div class="box">
                         <form id="form" class="indexer__form">
                             {{-- <form action="/indexer" method="POST" enctype="multipart/form-data"> --}}
@@ -190,7 +242,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     var channel = Echo.channel('indexer{{ $userId }}');
 channel.listen('.App\\Events\\UrlProcessed', function(data) {
+//   alert(JSON.stringify(data));
   printList(data);
+//   console.log(localStorage.getItem('batchId'));
   getProgress(localStorage.getItem('batchId'));
 });
 });
