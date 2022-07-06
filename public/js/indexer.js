@@ -122,14 +122,12 @@ async function printList(data) {
 async function printKeys() {
   let getData = await fetch("/keys/keylimits");
   let readyJson = await getData.json();
-
   if (readyJson == "") {
     alert("ошибка запроса ключей");
   } else {
     for (key in readyJson) {
       const keyBox = document.createElement("p");
       keyBox.classList.add('badge', 'badge-soft-dark', 'px-l');
-    //   keyBox.classList.add('bg-info');
       const keyIcon = document.createElement("i");
       keyIcon.classList.add('mdi', 'mdi-account-key-outline');
       keyBox.appendChild(keyIcon);
@@ -138,7 +136,6 @@ async function printKeys() {
       keyBox.appendChild(keyName);
       const keyBadge = document.createElement("span");
       keyBadge.innerText = readyJson[key];
-
       if (readyJson[key] <= 50) {
         keyBadge.classList.add('badge', 'bg-primary');
       } else if ((readyJson[key] > 50) && (readyJson[key] <= 150)) {
@@ -148,12 +145,10 @@ async function printKeys() {
       }
       keyBox.appendChild(keyBadge);
       keysWrapper.appendChild(keyBox);
-      console.log(keyIcon);
+
     }
   }
 }
-{/* <p>Example heading <span class="badge bg-light">New</span></p> */}
-
 class CustomTextarea {
   constructor(element) {
     this.element = element;
