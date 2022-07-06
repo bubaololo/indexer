@@ -33,7 +33,7 @@ class GoogleApiService
 
     public function sendRequest($apiKey, $url, $actionType, $userId)
     {
-
+        info('URL не является корректным.');
 
         $this->client->setAuthConfig(Storage::path('keys/'.$apiKey.'.json'));
         $this->client->addScope('https://www.googleapis.com/auth/indexing');
@@ -41,7 +41,10 @@ class GoogleApiService
         $endpoint = 'https://indexing.googleapis.com/v3/urlNotifications:publish';
         
             if (!filter_var($url, FILTER_VALIDATE_URL)) {
-                return $result[] =  $url.'URL не является корректным.';
+                // return $result[] =  $url.'URL не является корректным.';
+                UrlProcessed::dispatch($url.'URL не является корректным.',$userId);
+                info($url.'URL не является корректным.');
+                exit();
             } elseif ($actionType == 'get') {
                 $response = $httpClient->get('https://indexing.googleapis.com/v3/urlNotifications/metadata?url=' . urlencode($url));
             } else {
@@ -54,8 +57,8 @@ class GoogleApiService
                 // Cache::increment($apiKey);
                 cache([$apiKey => cache($apiKey)+1,86400]);
             }
-            $data = (string) $response->getBody();
-            $result = json_decode($data, true);
+
+            $result = json_decode($response->getBody(), true);
 
             UrlProcessed::dispatch($result,$userId);
 

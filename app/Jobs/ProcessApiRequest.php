@@ -10,9 +10,6 @@ use Illuminate\Bus\Batchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Services\GoogleApiService;
-
-
-
 use Illuminate\Support\Facades\Storage;
 
 class ProcessApiRequest implements ShouldQueue

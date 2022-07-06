@@ -193,4 +193,19 @@
   .number:first-child {
     visibility: hidden;
   }
-  
+  .progress__stats {
+left: auto;
+right: 20px;
+transform: translateX(0%);
+transition: all .5s;
+  } 
+  /* .progress_wrapper {
+    position: fixed;
+    bottom: 3vh;
+    right: 3vh;
+  } */
+
+  .progress__stats.prg-hide {
+transform: translateX(130%);
+  }
+   

@@ -274,8 +274,8 @@
 
                             <li>
                                 <a href="{{ route('home') }}" class="waves-effect">
-                                    <i class="mdi mdi-home-variant-outline"></i><span
-                                        class="badge rounded-pill bg-primary float-end">3</span>
+                                    <i class="mdi mdi-home-variant-outline"></i>
+                                    {{-- <span class="badge rounded-pill bg-primary float-end">3</span> --}}
                                     <span>Главная</span>
                                 </a>
                             </li>
@@ -287,12 +287,12 @@
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                     <li><a href="{{ route('indexer') }}">Индексатор</a></li>
-                                    <li><a href="layouts-hori-topbar-dark.html">Сервис2</a></li>
-                                    <li><a href="layouts-hori-boxed-width.html">Сервис3</a></li>
+                                    {{-- <li><a href="layouts-hori-topbar-dark.html">Сервис2</a></li>
+                                    <li><a href="layouts-hori-boxed-width.html">Сервис3</a></li> --}}
                                 </ul>
                             </li>
 
-                            <li class="menu-title">Pages</li>
+                            {{-- <li class="menu-title">Pages</li>
 
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -305,13 +305,13 @@
                                     <li><a href="auth-recoverpw.html">Recover Password</a></li>
                                     <li><a href="auth-lock-screen.html">Lock Screen</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
 
 
 
                             
 
-                            <li>
+                            {{-- <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                                     <i class="ri-share-line"></i>
                                     <span>Multi Level</span>
@@ -325,7 +325,7 @@
                                         </ul>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                     <!-- Sidebar -->

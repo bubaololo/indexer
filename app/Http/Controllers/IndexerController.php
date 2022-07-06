@@ -24,8 +24,7 @@ class IndexerController extends Controller
         $textareaData = $request->one;
         $apiKey = $request->key;
         $action = $request->action;
-        // split teaxtarea content to a separate strings
-        $urlArray = preg_split('|\s|', $textareaData);
+        $urlArray = preg_split('|\s|', $textareaData);  // split teaxtarea content to a separate strings
         $urls = array_filter($urlArray);
         
         $urlJobs = [];
@@ -35,11 +34,6 @@ class IndexerController extends Controller
 
         $batch = Bus::batch($urlJobs)->dispatch();
 
-        // info(Bus::findBatch($batch->id));
-        // $batch->id;
-        // $batch->processedJobs();
-        // $batch->totalJobs;
-        // $batch->progress();
         return $batch->id;
   
 
@@ -47,7 +41,6 @@ class IndexerController extends Controller
     }
 
     public function getProgressStatus(Request $request) {
-        // info($request->getContent());
         $batch = Bus::findBatch($request->getContent());
         $stats = [];
         $stats['totalJobs'] = $batch->totalJobs;
@@ -56,4 +49,3 @@ class IndexerController extends Controller
         return json_encode($stats);
     }
 }
-// INVALID_ARGUMENT
