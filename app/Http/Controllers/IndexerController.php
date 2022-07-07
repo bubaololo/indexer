@@ -25,13 +25,32 @@ class IndexerController extends Controller
         $apiKey = $request->key;
         $action = $request->action;
         $urlArray = preg_split('|\s|', $textareaData);  // split teaxtarea content to a separate strings
-        $urls = array_filter($urlArray);
+        $urls = array_values(array_filter($urlArray));
+        $keyLimits = json_decode(ApiKeysService::getKeyLimits(), TRUE);
         
+        
+        $chunked = [];
+        foreach ($keyLimits as $key => $limit) {
+            
+                for ($i=0; $i<$limit; $i++) {
+                    if (!empty($urls)) {
+                    $chunked[] = [$key,array_shift($urls)];
+                } else break;
+                }
+        }
+        if (!empty($urls)) {
+           info("Не хватило лимита ключей");
+        }
+        
+        // dd( $chunked );
+
         $urlJobs = [];
-        foreach($urls as $url) {
+        foreach($chunked as $keyAndUrl) {
+            $apiKey=$keyAndUrl[0];
+            $url = $keyAndUrl[1];
             $urlJobs[] = new ProcessApiRequest($apiKey,$url,$action);
         }
-
+        // dd( $urlJobs );
         $batch = Bus::batch($urlJobs)->dispatch();
 
         return $batch->id;

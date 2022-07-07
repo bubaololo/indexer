@@ -51,11 +51,7 @@ class GoogleApiService
         'type' => $actionType
       ]);
                 $response = $httpClient->post($endpoint, ['body' => $content]);
-                //   $mc->set($apiKey,$mc->get($apiKey)+1,86400);
-                // Cache::increment($apiKey);
-                // cache([$apiKey => cache($apiKey)-1,86400]);
                 ApiKeysService::decrementKey($apiKey);
-                info($apiKey);
             }
 
             $result = json_decode($response->getBody(), true);

@@ -56,11 +56,12 @@ const progressBar = document.getElementById("progress");
 const toggleProgress= function() {
 
 let progressData = progressBar.style.width;
-console.log(progressData)
+// console.log(progressData)
 let progressWrapper = document.querySelector('.progress__stats');
 
 if ( (progressData == "0%") || (progressData == "100%")) {
 progressWrapper.classList.add('prg-hide');
+printKeys();
 } else {
     progressWrapper.classList.remove('prg-hide');
 }
@@ -110,7 +111,7 @@ function clearList() {
 
 
 async function printList(data) {
-  console.log(data);
+//   console.log(data);
 
   const row = document.createElement("pre");
   row.innerText = JSON.stringify(data.responce, undefined, 2);
@@ -120,6 +121,7 @@ async function printList(data) {
 }
 
 async function printKeys() {
+    keysWrapper.textContent = "";
   let getData = await fetch("/keys/keylimits");
   let readyJson = await getData.json();
   if (readyJson == "") {
