@@ -23,13 +23,23 @@ class ApiKeysService
         return $keyList;
     }
 
+    public static function decrementKey($key) {
+        
+        if (Cache::has($key)) {
+            if (Cache::get($key) === 0) { exit(); }
+            Cache::put($key, (Cache::get($key)-1), 86400);
+        } else {
+            Cache::put($key, 199, 86400);
+        }
+    }
+
     public static function getKeyLimits()
     {
         foreach (self::getKeyList() as $key => $value) {
             if (Cache::has($key)) {
                 $keyStatus[$key] = Cache::get($key);
             } else {
-                $keyStatus[$key] = 0;
+                $keyStatus[$key] = 200;
             }
         }
         return json_encode($keyStatus, JSON_UNESCAPED_UNICODE);

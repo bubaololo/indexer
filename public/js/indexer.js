@@ -137,12 +137,12 @@ async function printKeys() {
       const keyBadge = document.createElement("span");
       keyBadge.innerText = readyJson[key];
       if (readyJson[key] <= 50) {
-        keyBadge.classList.add('badge', 'bg-primary');
+        keyBadge.classList.add('badge', 'bg-danger');
       } else if ((readyJson[key] > 50) && (readyJson[key] <= 150)) {
         keyBadge.classList.add('badge', 'bg-warning');
       } else {
-        keyBadge.classList.add('badge', 'bg-danger');
-      }
+        keyBadge.classList.add('badge', 'bg-primary');
+      } 
       keyBox.appendChild(keyBadge);
       keysWrapper.appendChild(keyBox);
 

@@ -5,6 +5,7 @@ namespace App\Services;
 use Google_Client;
 use Illuminate\Support\Facades\Storage;
 use App\Events\UrlProcessed;
+use App\Services\ApiKeysService;
 
 class GoogleApiService
 {
@@ -33,8 +34,6 @@ class GoogleApiService
 
     public function sendRequest($apiKey, $url, $actionType, $userId)
     {
-        info('URL не является корректным.');
-
         $this->client->setAuthConfig(Storage::path('keys/'.$apiKey.'.json'));
         $this->client->addScope('https://www.googleapis.com/auth/indexing');
         $httpClient = $this->client->authorize();
@@ -42,9 +41,8 @@ class GoogleApiService
         
             if (!filter_var($url, FILTER_VALIDATE_URL)) {
                 // return $result[] =  $url.'URL не является корректным.';
-                UrlProcessed::dispatch($url.'URL не является корректным.',$userId);
-                info($url.'URL не является корректным.');
-                exit();
+                
+                exit(UrlProcessed::dispatch($url.'URL не является корректным.',$userId));
             } elseif ($actionType == 'get') {
                 $response = $httpClient->get('https://indexing.googleapis.com/v3/urlNotifications/metadata?url=' . urlencode($url));
             } else {
@@ -55,7 +53,9 @@ class GoogleApiService
                 $response = $httpClient->post($endpoint, ['body' => $content]);
                 //   $mc->set($apiKey,$mc->get($apiKey)+1,86400);
                 // Cache::increment($apiKey);
-                cache([$apiKey => cache($apiKey)+1,86400]);
+                // cache([$apiKey => cache($apiKey)-1,86400]);
+                ApiKeysService::decrementKey($apiKey);
+                info($apiKey);
             }
 
             $result = json_decode($response->getBody(), true);
