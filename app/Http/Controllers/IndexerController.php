@@ -27,30 +27,34 @@ class IndexerController extends Controller
         $urlArray = preg_split('|\s|', $textareaData);  // split teaxtarea content to a separate strings
         $urls = array_values(array_filter($urlArray));
         $keyLimits = json_decode(ApiKeysService::getKeyLimits(), TRUE);
-        
-        
-        $chunked = [];
-        foreach ($keyLimits as $key => $limit) {
-            
-                for ($i=0; $i<$limit; $i++) {
-                    if (!empty($urls)) {
-                    $chunked[] = [$key,array_shift($urls)];
-                } else break;
-                }
-        }
-        if (!empty($urls)) {
-           info("Не хватило лимита ключей");
-        }
-        
-        // dd( $chunked );
-
         $urlJobs = [];
-        foreach($chunked as $keyAndUrl) {
-            $apiKey=$keyAndUrl[0];
-            $url = $keyAndUrl[1];
-            $urlJobs[] = new ProcessApiRequest($apiKey,$url,$action);
+
+        
+        if ($action == 'get') {
+            foreach($urls as $url) {
+                $urlJobs[] = new ProcessApiRequest($apiKey,$url,$action);
+            }
+        } else {
+            $chunked = [];
+            foreach ($keyLimits as $key => $limit) {
+                
+                    for ($i=0; $i<$limit; $i++) {
+                        if (!empty($urls)) {
+                        $chunked[] = [$key,array_shift($urls)];
+                    } else break;
+                    }
+            }
+            if (!empty($urls)) {
+               info("Не хватило лимита ключей");
+            }
+            foreach($chunked as $keyAndUrl) {
+                $apiKey=$keyAndUrl[0];
+                $url = $keyAndUrl[1];
+                $urlJobs[] = new ProcessApiRequest($apiKey,$url,$action);
+            }
+
         }
-        // dd( $urlJobs );
+
         $batch = Bus::batch($urlJobs)->dispatch();
 
         return $batch->id;

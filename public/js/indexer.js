@@ -111,7 +111,6 @@ function clearList() {
 
 
 async function printList(data) {
-//   console.log(data);
 
   const row = document.createElement("pre");
   row.innerText = JSON.stringify(data.responce, undefined, 2);
