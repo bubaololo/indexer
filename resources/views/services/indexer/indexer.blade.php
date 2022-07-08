@@ -140,11 +140,15 @@
                                 data-bs-original-title="Список URL"></textarea>
                             <div class='linenumbers'></div>
                         </div>
-                        <div class="form__controls" id="key">
-
-                            <select class="form-select d-inline-block w-auto" id="key" name="key"
+                        <div class="form__controls" >
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="auto" checked="true">
+                                <label class="form-check-label" for="flexSwitchCheckChecked">автовыбор ключей</label>
+                              </div>
+                            <select class="form-select d-inline-block w-auto" id="key-selector" name="key"
                                 data-bs-toggle="tooltip" data-bs-placement="top" title=""
-                                data-bs-original-title="Выберите ключ на котором есть неизрасходованные на сегодня запросы">
+                                data-bs-original-title="Выберите ключ на котором есть неизрасходованные на сегодня запросы"
+                                style="display:none !important">
                                 @foreach ($keys as $keyname => $keyacc)
                                     <option title='{{ $keyacc }}' value="{{ $keyname }}">ключ
                                         <b>{{ $keyname }}</b>

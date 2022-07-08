@@ -1,14 +1,4 @@
-// readyData.replaceAll(/\W+/gu, ' ');
 
-// const printTasks = function(jsonData) {
-//     b = JSON.stringify(jsonData);
-
-//     document.querySelector('.list').textContent = b;
-//     // document.body.insertAdjacentHTML('afterbegin', a);
-//     console.log(b);
-// };
-
-// clearList();
 
 const display = document.querySelector(".list");
 const keysWrapper = document.querySelector(".keys");
@@ -192,6 +182,20 @@ class CustomTextarea {
 
 const textarea = new CustomTextarea(document.querySelector(".custom-textarea"));
 
+let autoKeysCheckbox = document.getElementById('flexSwitchCheckChecked');
+
+let keySelector = document.getElementById('key-selector');
+
+autoKeysCheckbox.addEventListener('change', function() {
+   
+   if (autoKeysCheckbox.checked) {
+    console.log(keySelector);
+    keySelector.setAttribute('style', 'display:none !important');
+   } else {
+    keySelector.setAttribute('style', 'display:inline !important');
+   }
+    
+});
 // printData();
 
 // sendButton = document.getElementById('send_button');
