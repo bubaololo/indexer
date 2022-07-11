@@ -9,9 +9,11 @@
         "google/apiclient": "^2.12",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.11",
+        "laravel/horizon": "^5.9",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.4",
+        "predis/predis": "^2.0",
         "pusher/pusher-php-server": "^7.0"
     },
     "require-dev": {
