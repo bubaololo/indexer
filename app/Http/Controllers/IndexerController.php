@@ -24,7 +24,6 @@ class IndexerController extends Controller
         $apiKey = $request->key;
         $action = $request->action;
         $autoMode = $request->auto;
-        // dd($autoMode);
         $urlArray = preg_split('|\s|', $textareaData);  // split teaxtarea content to a separate strings
         $urls = array_values(array_filter($urlArray));
         $keyLimits = json_decode(ApiKeysService::getKeyLimits(), true);
