@@ -11,6 +11,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Services\GoogleApiService;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Redis;
 
 class ProcessApiRequest implements ShouldQueue
 {
@@ -28,6 +29,7 @@ class ProcessApiRequest implements ShouldQueue
     private $actionType;
     private $apiKeyPath;
     public $userId;
+    private $api;
 
     public function __construct($apiKey, $url, $actionType)
     {
@@ -45,6 +47,15 @@ class ProcessApiRequest implements ShouldQueue
      */
     public function handle(GoogleApiService $api)
     {
-        $api->sendRequest($this->apiKey, $this->url, $this->actionType, $this->userId);
-    }
+        $this->api = $api;
+        Redis::throttle('key')->block(9000)->allow(599)->every(60)->then(function () {
+
+            $this->api->sendRequest($this->apiKey, $this->url, $this->actionType, $this->userId);
+            
+        });
+        }
+    // public function handle(GoogleApiService $api)
+    // {
+    //     $api->sendRequest($this->apiKey, $this->url, $this->actionType, $this->userId);
+    // }
 }
