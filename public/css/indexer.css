@@ -50,7 +50,7 @@
     background-color: var(--bg-color);
   }
   .list {
-    /* display: inline-block; */
+
     color: var(--text-color);
     display: flex;
     flex-direction: column;
@@ -60,14 +60,14 @@
     white-space: pre-wrap;
     background-image: none;
     padding: 4ch;
-    /* outline: 1px solid var(--accent-color); */
-    /* outline-offset: 2ch; */
-    /* border-radius: 30px; */
     grid-area: display;
-    min-height: 70vh;
-    overflow-x: scroll;
+    height: 80vh;
+    overflow: scroll;
     scrollbar-width: thin;
     scrollbar-color: var(--accent-color) var(--bg-color);
+  }
+  pre {
+    overflow: initial;
   }
   .title {
     grid-area: title;

@@ -1,13 +1,10 @@
-
-
 const display = document.querySelector(".list");
 const keysWrapper = document.querySelector(".keys");
-// const myStorage = window.localStorage;
 
 document.addEventListener("DOMContentLoaded", () => {
   printKeys();
   const ajaxSend = async (formData) => {
-    // clearList();
+
     display.classList.add("_active");
 
     const fetchResp = await fetch("/indexer", {
@@ -29,24 +26,29 @@ document.addEventListener("DOMContentLoaded", () => {
       const formData = new FormData(this);
       clearList();
       ajaxSend(formData)
-        .then((response) => {
-          // form.reset(); // очищаем поля формы
+        .then((responce) => {
           clearList();
           display.classList.remove("_active");
-          console.log(response);
-          localStorage.setItem("batchId", response);
+          let responceObj = JSON.parse(responce);
+          let batchId = responceObj.batchId;
+          console.log(batchId);
+          localStorage.setItem('batchId', batchId);
+          if (responceObj.hasOwnProperty('message')){
+            alert(responceObj.message);
+          }
           printKeys();
         })
         .catch((err) => console.error(err));
     });
   });
 });
+
 const progressBar = document.getElementById("progress");
 
 const toggleProgress= function() {
 
 let progressData = progressBar.style.width;
-// console.log(progressData)
+
 let progressWrapper = document.querySelector('.progress__stats');
 
 if ( (progressData == "0%") || (progressData == "100%")) {
@@ -82,8 +84,6 @@ function getProgress(formData) {
       return response.json();
     })
     .then((data) => {
-      //   console.log(data);
-      //   stats.innerText = JSON.stringify(data);
       totalJobs.innerText = data.totalJobs;
       processedJobs.innerText = data.processedJobs;
       progress.innerText = data.progress;
@@ -92,21 +92,15 @@ function getProgress(formData) {
 }
 
 function clearList() {
-  // const tables = document.querySelectorAll('table');
-  //     tables.forEach(table => table.textContent = '');
   display.textContent = "";
   keysWrapper.textContent = "";
 }
 
-
-
 async function printList(data) {
-
+  let resultItems = document.querySelectorAll('pre').length;
   const row = document.createElement("pre");
-  row.innerText = JSON.stringify(data.responce, undefined, 2);
-
+  row.innerText = (resultItems+1) + ')' + JSON.stringify(data.responce, undefined, 2).replace(/{|}|"/g, "");
   display.appendChild(row);
-
 }
 
 async function printKeys() {
@@ -196,10 +190,4 @@ autoKeysCheckbox.addEventListener('change', function() {
    }
     
 });
-// printData();
 
-// sendButton = document.getElementById('send_button');
-
-// sendButton.addEventListener(onclick, printTasks);
-
-// array1.forEach(element => console.log(element));

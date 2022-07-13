@@ -46,7 +46,8 @@ class IndexerController extends Controller
                     }
                 }
                 if (!empty($urls)) {
-                    info("Не хватило лимита ключей");
+                    $overhead = count($urls);
+                    $message = "Ссылок в запросе больше, чем доступно неиспользованных запросов в ключах, $overhead ссылок в списке не будет обработано";
                 }
                 foreach ($chunked as $keyAndUrl) {
                     $apiKey=$keyAndUrl[0];
@@ -61,7 +62,10 @@ class IndexerController extends Controller
         }
         $batch = Bus::batch($urlJobs)->dispatch();
 
-        return $batch->id;
+        if (isset($message)) {
+            return json_encode(['batch' => $batch->id, 'message'=> $message]);
+        }
+        return json_encode(['batchId' => $batch->id]);
     }
 
     public function getProgressStatus(Request $request)
